@@ -1,0 +1,23 @@
+on: push
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'gradle'
+
+      - run: ./gradlew publishToMavenLocal
+
+      - uses: test-room-7/action-update-file@v1
+        with:
+          file-path: |
+            ~/.m2/
+          branch: m2
+          commit-msg: Update m2
+          github-token: ${{ secrets.GITHUB_TOKEN }}
