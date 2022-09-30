@@ -1,3 +1,3 @@
-expect object Kmpgh {
-    fun hello(): String
+fun main() {
+    Kmpgh.hello()
 }

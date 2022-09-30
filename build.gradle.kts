@@ -1,13 +1,10 @@
 plugins {
     kotlin("multiplatform") version "1.7.20"
-    id("maven-publish")
 }
-
-group = "com.jamesward"
-version = "0.0.1"
 
 repositories {
     mavenCentral()
+    mavenLocal()
 }
 
 kotlin {
@@ -28,4 +25,13 @@ kotlin {
     linuxX64 {
 
     }
+
+    sourceSets {
+        val commonMain by getting {
+            dependencies {
+                implementation("com.jamesward:kmpgh:0.0.1")
+            }
+        }
+    }
+
 }
