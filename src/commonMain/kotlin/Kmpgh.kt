@@ -1,3 +1,3 @@
 fun main() {
-    Kmpgh.hello()
+    println(Kmpgh.hello())
 }

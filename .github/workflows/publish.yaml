@@ -1,10 +1,5 @@
 on: push
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -23,16 +18,5 @@ jobs:
             ~/.konan
           key: ${{ hashFiles('build.gradle.kts') }}
 
+      - run: ./gradlew runDebugExecutable
 
-      - run: ./gradlew publishToMavenLocal
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v2
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
-        with:
-          path: '/home/runner/.m2/repository'
-
-      - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v1

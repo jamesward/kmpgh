@@ -4,7 +4,7 @@ plugins {
 
 repositories {
     mavenCentral()
-    mavenLocal()
+    maven("https://jamesward.github.io/kmpgh/")
 }
 
 kotlin {
@@ -23,7 +23,11 @@ kotlin {
     }
 
     linuxX64 {
-
+        binaries {
+            executable(listOf(DEBUG, RELEASE)) {
+                entryPoint = "main"
+            }
+        }
     }
 
     sourceSets {
