@@ -14,10 +14,13 @@ jobs:
 
       - run: ./gradlew publishToMavenLocal
 
-      - uses: test-room-7/action-update-file@v1
+      - name: Setup Pages
+        uses: actions/configure-pages@v2
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
         with:
-          file-path: |
-            ~/.m2/
-          branch: m2
-          commit-msg: Update m2
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: '~/.m2/'
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v1
