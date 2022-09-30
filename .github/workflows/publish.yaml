@@ -12,7 +12,17 @@ jobs:
           java-version: '17'
           cache: 'gradle'
 
-      - run: ./gradlew publishToMavenLocal
+      - uses: actions/cache@v2
+        with:
+          path: |
+            ~/.konan
+          key: ${{ hashFiles('build.gradle.kts') }}
+
+
+      - run: |
+          ./gradlew publishToMavenLocal
+          ls ~/.m2/
+          echo $HOME
 
       - name: Setup Pages
         uses: actions/configure-pages@v2
