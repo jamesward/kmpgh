@@ -1,5 +1,10 @@
 on: push
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -12,17 +17,14 @@ jobs:
           java-version: '17'
           cache: 'gradle'
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         with:
           path: |
             ~/.konan
           key: ${{ hashFiles('build.gradle.kts') }}
 
 
-      - run: |
-          ./gradlew publishToMavenLocal
-          ls ~/.m2/
-          echo $HOME
+      - run: ./gradlew publishToMavenLocal
 
       - name: Setup Pages
         uses: actions/configure-pages@v2
